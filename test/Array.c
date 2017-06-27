@@ -67,12 +67,16 @@ Array* insertIndexAt(Array *array,AnyObject value,int index){
     }
     array->length++;
     
+    for (int i = 1; i <= array->length - index; i++) {
+        array->value[array->length - i] = array->value[array->length- i - 1];
+    }
+//    //将元素后移
+//    for (int i = 0; i < array->length - index; i++) {
+//        array->value[array->length - 1] = array->value[array->length - 1 - 1];
+//    }
     //插入指定位置
     array->value[index] = value;
-    //将元素后移
-    for (int i = index + 1; i < array->length; i++) {
-        array->value[array->length] = array->value[array->length-i];
-    }
+    
     OBJECTRETAIN(value);
     return array;
 }
